@@ -3,13 +3,23 @@ import './App.css';
 import PanelForm from './Components/PanelForm';
 import Card from './Components/Card';
 
-class App extends React.Component {
+class App extends React.Component<{},{}> {
+state = {
+weekForecast:""
+}
+
+handleSubmit = (jsonResponse: any) =>{
+this.setState({
+  weekForecast: jsonResponse
+})
+}
   public render() {
     return (
       <div className="App">
       <div className="panel-container">
         <div className="searchPanel">
-          <PanelForm />
+          <PanelForm 
+          onSubmit={this.handleSubmit}/>
         </div>
         </div>
         <div className="result-container">

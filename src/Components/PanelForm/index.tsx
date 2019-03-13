@@ -4,7 +4,11 @@ interface IState {
   city: string
 }
 
-export default class extends React.Component<{}, IState>{
+export interface Props{
+  onSubmit: Function
+}
+
+export default class extends React.Component<Props, IState>{
   state = {
     city: ''
   };
@@ -26,7 +30,7 @@ export default class extends React.Component<{}, IState>{
         return response.json();
       }
       throw new Error("Request failed!");
-    }).then(jsonResponse => console.log(jsonResponse));
+    }).then(jsonResponse => this.props.onSubmit(jsonResponse.list));
   }
 
   render() {
