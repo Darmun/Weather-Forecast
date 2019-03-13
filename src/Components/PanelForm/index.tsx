@@ -1,18 +1,51 @@
 import * as React from 'react';
 
-
-function PanelForm() {
-  return (
-    <form className="panel-form">
-      <input
-        type="text"
-        className="text-input is-rounded"
-        placeholder="Choose town.."/>
-      <button className="btn submit is-rounded">
-        Search
-      </button>
-    </form>
-  );
+interface IState {
+  city: string
 }
 
-export default PanelForm;
+export default class extends React.Component<{}, IState>{
+  state = {
+    city: ''
+  };
+
+  handleChange = (e: any) => {
+    const value: string = e.target.value;
+    this.setState({
+      city: value
+    })
+  };
+
+  submitData = (e: any) => {
+    e.preventDefault();
+    const apiKey: string = "33b985291235fc7df89ea4df9600c81c";
+    const url: string = `https://api.openweathermap.org/data/2.5/find?q=${this.state.city}&units=metric&APPID=${apiKey}`
+
+    fetch(url).then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error("Request failed!");
+    }).then(jsonResponse => console.log(jsonResponse));
+  }
+
+  render() {
+    return (
+      <form className="panel-form">
+        <input
+          type="text"
+          className="text-input is-rounded"
+          placeholder="Choose town.."
+          onChange={this.handleChange}
+          value={this.state.city}
+          />
+        <button className="btn submit is-rounded"
+          onClick={this.submitData}>
+          Search
+        </button>
+      </form>
+    );
+  }
+}
+
+
