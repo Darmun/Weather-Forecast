@@ -1,13 +1,33 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+@import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One|Roboto+Slab');
+
 html, body, #root {
-  height: 100%;
+  height: 100vh;
   margin:0;
   padding:0;
   font-size: 15px;
 }
+
+h1 {
+  font-family:'Alfa Slab One', cursive;
+  color: white;
+  font-size: 2.5em;
+  text-align:center;
+  margin: 40px;
+  letter-spacing:3px;
+}
+#root{
+background-image: url('images/snowy.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  overflow:scroll;
+}
 .App {
   height:100%;
   width:100%;
+  background-color:rgba(255,255,255,0.7); 
+ position:fixed;
+ overflow:scroll;
 }
 
 .centered-text{
@@ -17,6 +37,7 @@ html, body, #root {
   font-family: 'Roboto Slab', serif;
   font-size: 1.25em;
   color:#acb5c4;
+  background-color: white;
 font-weight: 300;
   box-sizing:border-box;
   padding: 10px;
@@ -43,16 +64,14 @@ li{
 }
 
 .panel-container{
-background-image: url('images/header_pic_big.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
+
 }
 .searchPanel{
-  background-color:rgba(255,255,255,0.7); 
   height:600px;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 .result-container{
   box-sizing: border-box;
@@ -106,8 +125,8 @@ transition-duration: 0.4s;
   .card{
     width: 32%;
   }
-    .panel-container{
-background-image: url('images/header_pic_medium.jpg');
+    #root{
+background-image: url('images/snowy_1200.jpg');
   }
 }
 
@@ -120,8 +139,8 @@ background-image: url('images/header_pic_medium.jpg');
   margin-right: auto;
   }
 
-      .panel-container{
-background-image: url('images/header_pic_small.jpg');
+      #root{
+background-image: url('images/snowy_860.jpg');
   }
 
 .weather-icon{
@@ -148,7 +167,7 @@ background-image: url('images/header_pic_small.jpg');
     margin:auto;
     display:block;
   }
-      .panel-container{
-background-image: url('images/header_pic_xs.jpg');
+      #root{
+background-image: url('images/snowy_xs.jpg');
   }
 }
