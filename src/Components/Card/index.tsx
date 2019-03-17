@@ -1,11 +1,12 @@
 import * as React from "react";
 
-export interface Props {
-  forecast: {
-    weather: Array<{
+interface weather{
       description: string;
       icon: string;
-    }>;
+}
+export interface Props {
+  forecast: {
+    weather: Array<weather>;
     main: {
       temp: number;
       pressure: number;
@@ -15,15 +16,16 @@ export interface Props {
     };
   };
   key: number;
+  day: any;
 }
 
-function Card({ forecast }: Props) {
+function Card({forecast,day}: Props) {
   return (
     <div className="card">
-      <div className="centered-text">Monday</div>
+      <div className="centered-text">{day}</div>
       <img
         className="weather-icon"
-        src={iconGenerator(forecast.weather[0].icon)}
+        src={iconGenerator(forecast.weather[0].icon, day)}
         alt={forecast.weather[0].description}
       />
       <ul>
@@ -35,8 +37,7 @@ function Card({ forecast }: Props) {
   );
 }
 
-function iconGenerator(weatherCode: string) {
-  console.log(weatherCode);
+function iconGenerator(weatherCode: string, day:any) {
   return `http://openweathermap.org/img/w/${weatherCode}.png`;
 }
 

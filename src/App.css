@@ -7,7 +7,7 @@ html, body, #root {
   font-size: 15px;
 }
 
-h1 {
+h1, h2  {
   font-family:'Alfa Slab One', cursive;
   color: white;
   font-size: 2.5em;
@@ -15,6 +15,7 @@ h1 {
   margin: 40px;
   letter-spacing:3px;
 }
+
 #root{
 background-image: url('images/snowy.jpg');
   background-repeat: no-repeat;
@@ -33,6 +34,10 @@ background-image: url('images/snowy.jpg');
 .centered-text{
   text-align:center;
 }
+
+.capitalized{
+  text-transform: capitalize;
+}
 .card {
   font-family: 'Roboto Slab', serif;
   font-size: 1.25em;
@@ -47,7 +52,8 @@ font-weight: 300;
 }
 
 .weather-icon{
-  max-height:150px;
+  height: 50px;
+  padding: 30px;
   float:right;
 }
 
@@ -63,9 +69,6 @@ li{
   padding-left: 10px;
 }
 
-.panel-container{
-
-}
 .searchPanel{
   height:600px;
   display: flex;
@@ -137,15 +140,13 @@ background-image: url('images/snowy_1200.jpg');
      display: block;
   margin-left: auto;
   margin-right: auto;
+  padding:30px 15px 15px 15px;
   }
 
       #root{
 background-image: url('images/snowy_860.jpg');
   }
 
-.weather-icon{
-  max-height:120px;
-}
   li{
     text-align:center;
   }
