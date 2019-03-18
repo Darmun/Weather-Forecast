@@ -5,7 +5,8 @@ interface IState {
 }
 
 export interface Props {
-  onSubmit: Function;
+  onSubmitWeekly: Function;
+  onSubmitHourly: Function;
 }
 
 export default class extends React.Component<Props, IState> {
@@ -23,18 +24,32 @@ export default class extends React.Component<Props, IState> {
   submitData = (e: any) => {
     e.preventDefault();
     const apiKey: string = "33b985291235fc7df89ea4df9600c81c";
-    const url: string = `https://api.openweathermap.org/data/2.5/find?q=${
+    const urlweekly: string = `https://api.openweathermap.org/data/2.5/find?q=${
       this.state.city
     }&units=metric&APPID=${apiKey}`;
 
-    fetch(url)
+    const urlhourly: string = `https://api.openweathermap.org/data/2.5/forecast?q=${
+      this.state.city
+    }&units=metric&APPID=${apiKey}`;
+
+
+    fetch(urlweekly)
       .then(response => {
         if (response.ok) {
           return response.json();
         }
         throw new Error("Request failed!");
       })
-      .then(jsonResponse => this.props.onSubmit(jsonResponse.list));
+      .then(jsonResponse => this.props.onSubmitWeekly(jsonResponse.list));
+
+      fetch(urlhourly)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Request failed!");
+      })
+      .then(jsonResponse => this.props.onSubmitHourly(jsonResponse.list));
   };
 
   render() {

@@ -25,7 +25,7 @@ function Card({forecast,day}: Props) {
       <div className="centered-text">{day}</div>
       <img
         className="weather-icon"
-        src={iconGenerator(forecast.weather[0].icon, day)}
+        src={iconGenerator(forecast.weather[0].icon)}
         alt={forecast.weather[0].description}
       />
       <ul>
@@ -37,7 +37,7 @@ function Card({forecast,day}: Props) {
   );
 }
 
-function iconGenerator(weatherCode: string, day:any) {
+function iconGenerator(weatherCode: string) {
   return `http://openweathermap.org/img/w/${weatherCode}.png`;
 }
 
