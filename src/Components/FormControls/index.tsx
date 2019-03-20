@@ -2,6 +2,7 @@ import * as React from "react";
 
 interface IState {
   city: string;
+  showErrorInfo: boolean;
 }
 
 export interface Props {
@@ -11,7 +12,8 @@ export interface Props {
 
 export default class extends React.Component<Props, IState> {
   state = {
-    city: ""
+    city: "",
+    showErrorInfo: false
   };
 
   handleChange = (e: any) => {
@@ -23,33 +25,59 @@ export default class extends React.Component<Props, IState> {
 
   submitData = (e: any) => {
     e.preventDefault();
-    const apiKey: string = "33b985291235fc7df89ea4df9600c81c";
-    const urlweekly: string = `https://api.openweathermap.org/data/2.5/find?q=${
-      this.state.city
-    }&units=metric&APPID=${apiKey}`;
+    if (this.state.showErrorInfo) {
+      this.setState({
+        showErrorInfo: false
+      });
+    }
+    this.getWeeklyData();
+    this.getHourlyData();
+  };
 
+  getHourlyData = () => {
+    const apiKey: string = "33b985291235fc7df89ea4df9600c81c";
     const urlhourly: string = `https://api.openweathermap.org/data/2.5/forecast?q=${
       this.state.city
     }&units=metric&APPID=${apiKey}`;
 
+    fetch(urlhourly)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        this.setState({
+          showErrorInfo: true
+        });
+        return false;
+      })
+      .then(jsonResponse => {
+        if (jsonResponse) {
+          this.props.onSubmitHourly(jsonResponse.list);
+        }
+      });
+  };
+
+  getWeeklyData = () => {
+    const apiKey: string = "33b985291235fc7df89ea4df9600c81c";
+    const urlweekly: string = `https://api.openweathermap.org/data/2.5/find?q=${
+      this.state.city
+    }&units=metric&APPID=${apiKey}`;
 
     fetch(urlweekly)
       .then(response => {
         if (response.ok) {
           return response.json();
         }
-        throw new Error("Request failed!");
+        this.setState({
+          showErrorInfo: true
+        });
+        return false;
       })
-      .then(jsonResponse => this.props.onSubmitWeekly(jsonResponse.list));
-
-      fetch(urlhourly)
-      .then(response => {
-        if (response.ok) {
-          return response.json();
+      .then(jsonResponse => {
+        if (jsonResponse) {
+          this.props.onSubmitWeekly(jsonResponse.list);
         }
-        throw new Error("Request failed!");
-      })
-      .then(jsonResponse => this.props.onSubmitHourly(jsonResponse.list));
+      });
   };
 
   render() {
@@ -65,6 +93,9 @@ export default class extends React.Component<Props, IState> {
         <button className="btn submit is-rounded" onClick={this.submitData}>
           Search
         </button>
+        {this.state.showErrorInfo && (
+          <div className="error-info">Invalid town name. Try again</div>
+        )}
       </form>
     );
   }
