@@ -17,15 +17,16 @@ export interface Props {
   };
   key: number;
   day: any;
+  onDisplayDetails: Function;
 }
 
-function Card({forecast,day}: Props) {
+function Card({forecast, day, onDisplayDetails}: Props) {
   return (
-    <div className="card">
+    <div className="card" onClick={() =>{onDisplayDetails(day)}}>
       <div className="centered-text">{day}</div>
       <img
         className="weather-icon"
-        src={iconGenerator(forecast.weather[0].icon)}
+        src={`http://openweathermap.org/img/w/${forecast.weather[0].icon}.png`}
         alt={forecast.weather[0].description}
       />
       <ul>
@@ -35,10 +36,6 @@ function Card({forecast,day}: Props) {
       </ul>
     </div>
   );
-}
-
-function iconGenerator(weatherCode: string) {
-  return `http://openweathermap.org/img/w/${weatherCode}.png`;
 }
 
 export default Card;
