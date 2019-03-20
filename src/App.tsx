@@ -11,22 +11,24 @@ interface IState {
   weeklyForecast: Array<object>;
   hourlyForecast: Array<object>;
   displayWeeklyForecast: boolean;
+  displayTable: boolean;
   dayDetails: Array<object>;
 }
-
 
 class App extends React.Component<{}, IState> {
   state = {
     weeklyForecast: [],
     hourlyForecast: [],
     displayWeeklyForecast: false,
-    dayDetails: [],
+    displayTable: false,
+    dayDetails: []
   };
 
   handleSubmitWeekly = (jsonResponse: Array<object>) => {
     this.setState({
       weeklyForecast: jsonResponse,
-      displayWeeklyForecast: true
+      displayWeeklyForecast: true,
+      displayTable: false,
     });
   };
 
@@ -36,21 +38,29 @@ class App extends React.Component<{}, IState> {
     });
   };
 
+  handleHideTable = () => {
+    this.setState({
+      displayTable: false
+    });
+  };
+
   handleGetDayDetails = (day: any) => {
     const { hourlyForecast } = this.state;
     const arrayLength: number = hourlyForecast.length;
     const matchingForecasts: Array<any> = [];
+    
     for (let i = 0; i < arrayLength; i++) {
       let dataStamp: any = this.getTimeStamp(hourlyForecast[i]);
       dataStamp = dataStamp.slice(0, 10);
-      let weekDay: any = moment(dataStamp).format("dddd");
+      let weekDay: string = moment(dataStamp).format("dddd");
       if (day === weekDay) {
         console.log(day);
         matchingForecasts.push(hourlyForecast[i]);
       }
     }
     this.setState({
-      dayDetails: matchingForecasts
+      dayDetails: matchingForecasts,
+      displayTable: true
     });
   };
 
@@ -67,7 +77,7 @@ class App extends React.Component<{}, IState> {
   };
 
   public render() {
-    const { weeklyForecast, displayWeeklyForecast } = this.state;
+    const { weeklyForecast, displayWeeklyForecast, displayTable } = this.state;
 
     return (
       <div className="App">
@@ -90,25 +100,27 @@ class App extends React.Component<{}, IState> {
                 day={this.getDayName(index)}
               />
             ))}
+          {displayTable && (
+            <div style={{ width: "100%" }}>
+              <ForecastTable>
+                {this.state.dayDetails.map((hourlyData: any) => (
+                  <Row 
+                  key={hourlyData.dt} 
+                  hourlyData={hourlyData} 
+                  />
+                ))}
+              </ForecastTable>
+            </div>
+          )}
         </div>
-        <ForecastTable>
-        {this.state.dayDetails.map((hourlyData: any) => (
-          <Row key={hourlyData.dt} hourlyData={hourlyData} />)
-        )}
-          </ForecastTable>
         <footer>
           <a href="https://www.freepik.com/free-photos-vectors/snow">
             Snow vector created by freepik - www.freepik.com
           </a>
         </footer>
-
       </div>
     );
   }
 }
-
-// function compareDays(day) {
-//  moment(dt_txt, "YYYY-MM-DD");              <DayDetails hourlyDataSet={this.state.dayDetails} />
-// }
 
 export default App;

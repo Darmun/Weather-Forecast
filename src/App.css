@@ -40,15 +40,20 @@ background-image: url('images/snowy.jpg');
 }
 .card {
   font-family: 'Roboto Slab', serif;
-  font-size: 1.25em;
+  font-size: 1.5em;
   color:#acb5c4;
   background-color: white;
-font-weight: 300;
+  font-weight: 300;
   box-sizing:border-box;
   padding: 10px;
   margin: 5px;
   width: 24%;
   box-shadow: 0 0 5px black;
+}
+
+.card:hover{
+cursor:pointer;
+background-image: linear-gradient(white 90%, grey);
 }
 
 .weather-icon{
@@ -76,6 +81,7 @@ li{
   align-items: center;
   flex-direction: column;
 }
+
 .result-container{
   box-sizing: border-box;
   display: flex;
@@ -93,6 +99,7 @@ li{
   text-indent: 10px;
   box-shadow: 0 0 5px black;
 }
+
 .is-rounded{
   border-radius: 15px;
 }
@@ -104,10 +111,12 @@ li{
   border:none;
   box-shadow: 0 0 5px black;
 }
+
 .submit:hover{
 color:white;
 background-color:#333;
 }
+
 button{
 font-size: 1.25em;
 box-sizing: border-box;
@@ -115,6 +124,37 @@ padding: 6px 20px;
 -webkit-transition-duration: 0.4s; /* Safari */
 transition-duration: 0.4s;
 }
+
+table{
+  font-family: 'Roboto Slab', serif;
+  width:75%;
+  max-width:900px;
+  margin:50px auto 0 auto;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 0 5px black;
+  padding:10px;
+}
+
+th{
+padding-bottom: 10px;
+padding-top: 10px;
+}
+
+td .weather-icon{
+  float:none;
+  padding: 0;
+}
+
+th, td {
+  padding:5px;
+  text-align:center;
+}
+
+td{
+  border-top: 2px solid gray;
+}
+
 
 @media only screen and (min-width: 1500px) {
   /* For mobile phones: */
@@ -143,6 +183,13 @@ background-image: url('images/snowy_1200.jpg');
   padding:30px 15px 15px 15px;
   }
 
+  .wind-info{
+    display:none;
+  }
+  table{
+    margin-top: 25px;
+  }
+
       #root{
 background-image: url('images/snowy_860.jpg');
   }
@@ -152,9 +199,18 @@ background-image: url('images/snowy_860.jpg');
   }
     .card{
     width:47%;
+    font-size: 1.2em;
   }
 }
 
+@media only screen and (max-width: 480px) {
+table{
+  box-sizing:border-box;
+  width:98%;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+}
 
 @media only screen and (max-width: 360px) {
   /* For mobile phones: */
