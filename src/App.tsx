@@ -1,11 +1,10 @@
 import * as React from "react";
 import "./App.css";
-import FormControls from "./Components/FormControls";
+import SearchForm from "./Components/SearchForm";
 import Card from "./Components/Card";
 import * as moment from "moment";
 import ForecastTable from "./Components/ForecastTable";
 import Row from "./Components/Row";
-// import DayDetails from "./Components/DayDetails"
 
 interface IState {
   weeklyForecast: Array<object>;
@@ -13,6 +12,7 @@ interface IState {
   displayWeeklyForecast: boolean;
   displayTable: boolean;
   dayDetails: Array<object>;
+  checkedDay: string;
 }
 
 class App extends React.Component<{}, IState> {
@@ -21,6 +21,7 @@ class App extends React.Component<{}, IState> {
     hourlyForecast: [],
     displayWeeklyForecast: false,
     displayTable: false,
+    checkedDay: "",
     dayDetails: []
   };
 
@@ -54,13 +55,13 @@ class App extends React.Component<{}, IState> {
       dataStamp = dataStamp.slice(0, 10);
       let weekDay: string = moment(dataStamp).format("dddd");
       if (day === weekDay) {
-        console.log(day);
         matchingForecasts.push(hourlyForecast[i]);
       }
     }
     this.setState({
       dayDetails: matchingForecasts,
-      displayTable: true
+      displayTable: true,
+      checkedDay: day
     });
   };
 
@@ -77,14 +78,14 @@ class App extends React.Component<{}, IState> {
   };
 
   public render() {
-    const { weeklyForecast, displayWeeklyForecast, displayTable } = this.state;
+    const { weeklyForecast, displayWeeklyForecast, displayTable, checkedDay } = this.state;
 
     return (
       <div className="App">
         <div className="panel-container">
           <div className="searchPanel">
             <h1>City Forecast</h1>
-            <FormControls
+            <SearchForm
               onSubmitWeekly={this.handleSubmitWeekly}
               onSubmitHourly={this.handleSubmitHourly}
             />
@@ -101,8 +102,8 @@ class App extends React.Component<{}, IState> {
               />
             ))}
           {displayTable && (
-            <div style={{ width: "100%" }}>
-              <ForecastTable>
+            <div className="forecast-table-wrapper">
+              <ForecastTable currentDay={checkedDay}>
                 {this.state.dayDetails.map((hourlyData: any) => (
                   <Row 
                   key={hourlyData.dt} 
@@ -113,11 +114,6 @@ class App extends React.Component<{}, IState> {
             </div>
           )}
         </div>
-        <footer>
-          <a href="https://www.freepik.com/free-photos-vectors/snow">
-            Snow vector created by freepik - www.freepik.com
-          </a>
-        </footer>
       </div>
     );
   }

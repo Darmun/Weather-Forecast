@@ -21,14 +21,14 @@ background-image: url('images/snowy.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  overflow:scroll;
 }
 .App {
   height:100%;
   width:100%;
   background-color:rgba(255,255,255,0.7); 
  position:fixed;
- overflow:scroll;
+ overflow-y:scroll;
+ position: relative;
 }
 
 .centered-text{
@@ -100,6 +100,9 @@ li{
   box-shadow: 0 0 5px black;
   position:relative;
 }
+.text-input:focus, button:focus{
+  outline: none;
+}
 .error-info{
   position:absolute;
   color: red;
@@ -108,10 +111,12 @@ li{
   text-align:center;
   width:225px;
   font-family:'Roboto Slab', serif;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .is-rounded{
-  border-radius: 15px;
+  border-radius: 15px; 
 }
 
 .submit{
@@ -135,11 +140,15 @@ padding: 6px 20px;
 transition-duration: 0.4s;
 }
 
+.forecast-table-wrapper{
+width:100%;
+}
+
 table{
   font-family: 'Roboto Slab', serif;
   width:75%;
   max-width:900px;
-  margin:50px auto 0 auto;
+  margin:30px auto;
   border-collapse: collapse;
   background-color: white;
   box-shadow: 0 0 5px black;
@@ -165,6 +174,14 @@ td{
   border-top: 2px solid gray;
 }
 
+footer {
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+}
 
 @media only screen and (min-width: 1500px) {
   /* For mobile phones: */
@@ -197,7 +214,7 @@ background-image: url('images/snowy_1200.jpg');
     display:none;
   }
   table{
-    margin-top: 25px;
+    margin: 10px auto;
   }
 
       #root{
