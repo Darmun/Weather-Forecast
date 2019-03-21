@@ -1,8 +1,8 @@
 import * as React from "react";
 
-interface weather{
-      description: string;
-      icon: string;
+interface weather {
+  description: string;
+  icon: string;
 }
 export interface Props {
   forecast: {
@@ -20,9 +20,14 @@ export interface Props {
   onDisplayDetails: Function;
 }
 
-function Card({forecast, day, onDisplayDetails}: Props) {
+function Card({ forecast, day, onDisplayDetails }: Props) {
   return (
-    <div className="card" onClick={() =>{onDisplayDetails(day)}}>
+    <div
+      className="card"
+      onClick={() => {
+        onDisplayDetails(day);
+      }}
+    >
       <div className="centered-text">{day}</div>
       <img
         className="weather-icon"

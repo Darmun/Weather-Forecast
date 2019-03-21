@@ -103,7 +103,7 @@ class App extends React.Component<{}, IState> {
             ))}
           {displayTable && (
             <div className="forecast-table-wrapper">
-              <ForecastTable currentDay={checkedDay}>
+              <ForecastTable currentDay={checkedDay} onClose={this.handleHideTable}>
                 {this.state.dayDetails.map((hourlyData: any) => (
                   <Row 
                   key={hourlyData.dt} 

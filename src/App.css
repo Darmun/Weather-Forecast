@@ -140,6 +140,25 @@ padding: 6px 20px;
 transition-duration: 0.4s;
 }
 
+.close-btn{
+  position:absolute;
+  font-size:1.2em;
+  text-align:center;
+  background-color:white;
+  font-weight: bold;
+  height: 40px;
+  width: 40px;
+  padding:0;
+  top: 0;
+  right: 0;
+  border:none;
+}
+
+.close-btn:hover{
+  color:white;
+  background-color:#333;
+}
+
 .forecast-table-wrapper{
 width:100%;
 }
@@ -153,6 +172,13 @@ table{
   background-color: white;
   box-shadow: 0 0 5px black;
   padding:10px;
+}
+
+.table-header{
+  font-size:1.75em;
+  padding:15px;
+  border-bottom: 2px solid gray;
+  position:relative;
 }
 
 th{
@@ -172,15 +198,6 @@ th, td {
 
 td{
   border-top: 2px solid gray;
-}
-
-footer {
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1rem;
-  background-color: #efefef;
-  text-align: center;
 }
 
 @media only screen and (min-width: 1500px) {
